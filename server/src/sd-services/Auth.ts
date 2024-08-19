@@ -4,6 +4,7 @@ let instance = null;
 //append_imports_start
 
 import * as cookieParser from 'cookie-parser'; //_splitter_
+import { sep } from 'path'; //_splitter_
 import { SDBaseService } from '../services/SDBaseService'; //_splitter_
 import { TracerService } from '../services/TracerService'; //_splitter_
 import log from '../utils/Logger'; //_splitter_
@@ -200,6 +201,43 @@ export class Auth {
           //appendnew_next_sd_IZuw9UqTTIjShIgn
         } catch (e) {
           return await this.errorHandler(bh, e, 'sd_IZuw9UqTTIjShIgn');
+        }
+      },
+      this.sdService.getMiddlesWaresBySequenceId(
+        null,
+        'post',
+        this.generatedMiddlewares
+      )
+    );
+
+    this.app['post'](
+      `${this.serviceBasePath}/upload`,
+      cookieParser(),
+      this.sdService.getMiddlesWaresBySequenceId(
+        null,
+        'pre',
+        this.generatedMiddlewares
+      ),
+      this.sdService.multipartParser({
+        type: 'path',
+        path: 'file'.replace(/\\|\//g, sep),
+        options: [{ name: 'file', maxCount: 1 }],
+      }),
+
+      async (req, res, next) => {
+        let bh: any = {};
+        try {
+          bh = this.sdService.__constructDefault(
+            { local: {}, input: {} },
+            req,
+            res,
+            next
+          );
+          let parentSpanInst = null;
+          bh = await this.sd_3m3gQTAUd4AMGYnt(bh, parentSpanInst);
+          //appendnew_next_sd_vhf1KabLfHaM7GrT
+        } catch (e) {
+          return await this.errorHandler(bh, e, 'sd_vhf1KabLfHaM7GrT');
         }
       },
       this.sdService.getMiddlesWaresBySequenceId(
@@ -656,7 +694,7 @@ export class Auth {
           contentOptions: undefined,
           securityOptions: undefined,
           headerOptions: undefined,
-          attachments: undefined,
+          attachments: [],
         }
       );
       this.tracerService.sendData(spanInst, bh);
@@ -829,10 +867,7 @@ export class Auth {
       parentSpanInst
     );
     try {
-      const bcrypt = require('bcrypt');
       bh.body = bh.input.body;
-      const hashedPassword = await bcrypt.hash(bh.input.body['password'], 10);
-      bh.input.body['password'] = hashedPassword;
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_9Gv4mFF6jdv5uacF(bh, parentSpanInst);
       //appendnew_next_sd_RzkdQbrlCEU6tOPd
@@ -894,6 +929,68 @@ export class Auth {
         spanInst,
         'sd_DGG4LLEBZeopniH6'
       );
+    }
+  }
+
+  async sd_3m3gQTAUd4AMGYnt(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_3m3gQTAUd4AMGYnt',
+      parentSpanInst
+    );
+    try {
+      bh.file = bh.input.files.file[0];
+      bh.status = 200;
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.sd_nh6kbwx8AvS2WeI3(bh, parentSpanInst);
+      //appendnew_next_sd_3m3gQTAUd4AMGYnt
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_3m3gQTAUd4AMGYnt',
+        spanInst,
+        'sd_3m3gQTAUd4AMGYnt'
+      );
+    }
+  }
+
+  async sd_nh6kbwx8AvS2WeI3(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_nh6kbwx8AvS2WeI3',
+      parentSpanInst
+    );
+    try {
+      bh.result = await MongoPersistance.getInstance().uploadFile(
+        'sd_PhRLzlckwjzX0TdC',
+        'files',
+        bh.file.path,
+        bh.file.filename,
+        bh.option,
+        bh.option
+      );
+      this.tracerService.sendData(spanInst, bh);
+      await this.sd_MYteWlyo21ynrEtN(bh, parentSpanInst);
+      //appendnew_next_sd_nh6kbwx8AvS2WeI3
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_nh6kbwx8AvS2WeI3',
+        spanInst,
+        'sd_nh6kbwx8AvS2WeI3'
+      );
+    }
+  }
+
+  async sd_MYteWlyo21ynrEtN(bh, parentSpanInst) {
+    try {
+      bh.web.res.status(bh.status).send(bh.result);
+
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_MYteWlyo21ynrEtN');
     }
   }
 
