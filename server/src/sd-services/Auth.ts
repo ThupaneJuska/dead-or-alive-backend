@@ -979,7 +979,7 @@ export class Auth {
       const bcrypt = require('bcrypt');
       delete bh.input.body.file2;
       const hashedPassword = await bcrypt.hash(bh.input.body['password'], 10);
-      bh.input.body['password'] = bh.sendPassword;
+      bh.input.body.password = bh.sendPassword;
       bh.input.body['password'] = hashedPassword;
       bh.body = bh.input.body;
       this.tracerService.sendData(spanInst, bh);
