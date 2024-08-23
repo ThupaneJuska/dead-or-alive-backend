@@ -279,6 +279,38 @@ export class Auth {
         this.generatedMiddlewares
       )
     );
+
+    this.app['get'](
+      `${this.serviceBasePath}/get-users`,
+      cookieParser(),
+      this.sdService.getMiddlesWaresBySequenceId(
+        null,
+        'pre',
+        this.generatedMiddlewares
+      ),
+
+      async (req, res, next) => {
+        let bh: any = {};
+        try {
+          bh = this.sdService.__constructDefault(
+            { local: {}, input: {} },
+            req,
+            res,
+            next
+          );
+          let parentSpanInst = null;
+          bh = await this.sd_9pvx0JI6XnwgF8JW(bh, parentSpanInst);
+          //appendnew_next_sd_tdT1EMSloGiBqliF
+        } catch (e) {
+          return await this.errorHandler(bh, e, 'sd_tdT1EMSloGiBqliF');
+        }
+      },
+      this.sdService.getMiddlesWaresBySequenceId(
+        null,
+        'post',
+        this.generatedMiddlewares
+      )
+    );
     //appendnew_flow_Auth_HttpIn
   }
   //   service flows_Auth
@@ -1244,6 +1276,66 @@ export class Auth {
       return bh;
     } catch (e) {
       return await this.errorHandler(bh, e, 'sd_MYteWlyo21ynrEtN');
+    }
+  }
+
+  async sd_9pvx0JI6XnwgF8JW(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_9pvx0JI6XnwgF8JW',
+      parentSpanInst
+    );
+    try {
+      bh.collection = 'users';
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.sd_3bZ0dL716E4LAo89(bh, parentSpanInst);
+      //appendnew_next_sd_9pvx0JI6XnwgF8JW
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_9pvx0JI6XnwgF8JW',
+        spanInst,
+        'sd_9pvx0JI6XnwgF8JW'
+      );
+    }
+  }
+
+  async sd_3bZ0dL716E4LAo89(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_3bZ0dL716E4LAo89',
+      parentSpanInst
+    );
+    try {
+      bh.result = await MongoPersistance.getInstance().find(
+        'sd_PhRLzlckwjzX0TdC',
+        bh.collection,
+        bh.query,
+        bh.option,
+        bh.option
+      );
+      this.tracerService.sendData(spanInst, bh);
+      await this.sd_IZKI57INX67m4XpQ(bh, parentSpanInst);
+      //appendnew_next_sd_3bZ0dL716E4LAo89
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_3bZ0dL716E4LAo89',
+        spanInst,
+        'sd_3bZ0dL716E4LAo89'
+      );
+    }
+  }
+
+  async sd_IZKI57INX67m4XpQ(bh, parentSpanInst) {
+    try {
+      bh.web.res.status(200).send(bh.result);
+
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_IZKI57INX67m4XpQ');
     }
   }
 
