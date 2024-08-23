@@ -971,6 +971,7 @@ export class Auth {
       parentSpanInst
     );
     try {
+      delete bh.input.body.file2;
       bh.body = bh.input.body;
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_9Gv4mFF6jdv5uacF(bh, parentSpanInst);
