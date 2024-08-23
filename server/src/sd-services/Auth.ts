@@ -267,10 +267,42 @@ export class Auth {
             next
           );
           let parentSpanInst = null;
-          bh = await this.sd_3m3gQTAUd4AMGYnt(bh, parentSpanInst);
-          //appendnew_next_sd_vhf1KabLfHaM7GrT
+          bh = await this.sd_Uny7tFUhye8slLhT(bh, parentSpanInst);
+          //appendnew_next_sd_5nCrYBLIjU4rIeGR
         } catch (e) {
-          return await this.errorHandler(bh, e, 'sd_vhf1KabLfHaM7GrT');
+          return await this.errorHandler(bh, e, 'sd_5nCrYBLIjU4rIeGR');
+        }
+      },
+      this.sdService.getMiddlesWaresBySequenceId(
+        null,
+        'post',
+        this.generatedMiddlewares
+      )
+    );
+
+    this.app['get'](
+      `${this.serviceBasePath}/get-users`,
+      cookieParser(),
+      this.sdService.getMiddlesWaresBySequenceId(
+        null,
+        'pre',
+        this.generatedMiddlewares
+      ),
+
+      async (req, res, next) => {
+        let bh: any = {};
+        try {
+          bh = this.sdService.__constructDefault(
+            { local: {}, input: {} },
+            req,
+            res,
+            next
+          );
+          let parentSpanInst = null;
+          bh = await this.sd_9pvx0JI6XnwgF8JW(bh, parentSpanInst);
+          //appendnew_next_sd_tdT1EMSloGiBqliF
+        } catch (e) {
+          return await this.errorHandler(bh, e, 'sd_tdT1EMSloGiBqliF');
         }
       },
       this.sdService.getMiddlesWaresBySequenceId(
@@ -436,7 +468,7 @@ export class Auth {
       parentSpanInst
     );
     try {
-      bh.message = {
+      bh.result = {
         message: 'User not found',
       };
       this.tracerService.sendData(spanInst, bh);
@@ -456,7 +488,7 @@ export class Auth {
 
   async sd_GLaqJCskcCVvIO8J(bh, parentSpanInst) {
     try {
-      bh.web.res.status(200).send(bh.message);
+      bh.web.res.status(200).send(bh.result);
 
       return bh;
     } catch (e) {
@@ -524,9 +556,7 @@ export class Auth {
       parentSpanInst
     );
     try {
-      bh.message = {
-        message: 'Successfully logged in',
-      };
+      bh.result = bh.result;
       this.tracerService.sendData(spanInst, bh);
       await this.sd_GLaqJCskcCVvIO8J(bh, parentSpanInst);
       //appendnew_next_sd_sC7lG9D8eBGthwno
@@ -548,7 +578,7 @@ export class Auth {
       parentSpanInst
     );
     try {
-      bh.message = {
+      bh.result = {
         message: "Password Don't match",
       };
       this.tracerService.sendData(spanInst, bh);
@@ -941,6 +971,7 @@ export class Auth {
       parentSpanInst
     );
     try {
+      delete bh.input.body.file2;
       bh.body = bh.input.body;
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_9Gv4mFF6jdv5uacF(bh, parentSpanInst);
@@ -1185,32 +1216,32 @@ export class Auth {
     }
   }
 
-  async sd_3m3gQTAUd4AMGYnt(bh, parentSpanInst) {
+  async sd_Uny7tFUhye8slLhT(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'sd_3m3gQTAUd4AMGYnt',
+      'sd_Uny7tFUhye8slLhT',
       parentSpanInst
     );
     try {
       bh.file = bh.input.files.file[0];
       bh.status = 200;
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_nh6kbwx8AvS2WeI3(bh, parentSpanInst);
-      //appendnew_next_sd_3m3gQTAUd4AMGYnt
+      bh = await this.sd_5u8G7H5vbCc0Dpfg(bh, parentSpanInst);
+      //appendnew_next_sd_Uny7tFUhye8slLhT
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_3m3gQTAUd4AMGYnt',
+        'sd_Uny7tFUhye8slLhT',
         spanInst,
-        'sd_3m3gQTAUd4AMGYnt'
+        'sd_Uny7tFUhye8slLhT'
       );
     }
   }
 
-  async sd_nh6kbwx8AvS2WeI3(bh, parentSpanInst) {
+  async sd_5u8G7H5vbCc0Dpfg(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
-      'sd_nh6kbwx8AvS2WeI3',
+      'sd_5u8G7H5vbCc0Dpfg',
       parentSpanInst
     );
     try {
@@ -1223,27 +1254,87 @@ export class Auth {
         bh.option
       );
       this.tracerService.sendData(spanInst, bh);
-      await this.sd_MYteWlyo21ynrEtN(bh, parentSpanInst);
-      //appendnew_next_sd_nh6kbwx8AvS2WeI3
+      await this.sd_GsY7hPXdfWag0rXM(bh, parentSpanInst);
+      //appendnew_next_sd_5u8G7H5vbCc0Dpfg
       return bh;
     } catch (e) {
       return await this.errorHandler(
         bh,
         e,
-        'sd_nh6kbwx8AvS2WeI3',
+        'sd_5u8G7H5vbCc0Dpfg',
         spanInst,
-        'sd_nh6kbwx8AvS2WeI3'
+        'sd_5u8G7H5vbCc0Dpfg'
       );
     }
   }
 
-  async sd_MYteWlyo21ynrEtN(bh, parentSpanInst) {
+  async sd_GsY7hPXdfWag0rXM(bh, parentSpanInst) {
     try {
       bh.web.res.status(bh.status).send(bh.result);
 
       return bh;
     } catch (e) {
-      return await this.errorHandler(bh, e, 'sd_MYteWlyo21ynrEtN');
+      return await this.errorHandler(bh, e, 'sd_GsY7hPXdfWag0rXM');
+    }
+  }
+
+  async sd_9pvx0JI6XnwgF8JW(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_9pvx0JI6XnwgF8JW',
+      parentSpanInst
+    );
+    try {
+      bh.collection = 'users';
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.sd_3bZ0dL716E4LAo89(bh, parentSpanInst);
+      //appendnew_next_sd_9pvx0JI6XnwgF8JW
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_9pvx0JI6XnwgF8JW',
+        spanInst,
+        'sd_9pvx0JI6XnwgF8JW'
+      );
+    }
+  }
+
+  async sd_3bZ0dL716E4LAo89(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_3bZ0dL716E4LAo89',
+      parentSpanInst
+    );
+    try {
+      bh.result = await MongoPersistance.getInstance().find(
+        'sd_PhRLzlckwjzX0TdC',
+        bh.collection,
+        bh.query,
+        bh.option,
+        bh.option
+      );
+      this.tracerService.sendData(spanInst, bh);
+      await this.sd_IZKI57INX67m4XpQ(bh, parentSpanInst);
+      //appendnew_next_sd_3bZ0dL716E4LAo89
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_3bZ0dL716E4LAo89',
+        spanInst,
+        'sd_3bZ0dL716E4LAo89'
+      );
+    }
+  }
+
+  async sd_IZKI57INX67m4XpQ(bh, parentSpanInst) {
+    try {
+      bh.web.res.status(200).send(bh.result);
+
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_IZKI57INX67m4XpQ');
     }
   }
 
