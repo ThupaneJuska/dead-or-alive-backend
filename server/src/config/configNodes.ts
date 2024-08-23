@@ -450,6 +450,43 @@ export default {
                 }
             },
             "__n_excludedFromValidation__": {}
+        },
+        "sd_HkTnnT8uG4AOwNsg": {
+            "id": "sd_HkTnnT8uG4AOwNsg",
+            "type": "emailout-config",
+            "viewType": "server",
+            "nodeType": "flow",
+            "name": "gmail account",
+            "server": "smtp.gmail.com",
+            "port": 465,
+            "tls": false,
+            "secure": true,
+            "userid": process.env. gmail_userid,
+            "password": process.env.gmail_appPassword,
+            "category": "config",
+            "__ssdTypeInputs__": {
+                "server": {
+                    "type": "str",
+                    "value": "smtp.gmail.com",
+                    "constant": false
+                },
+                "port": {
+                    "type": "num",
+                    "value": "465",
+                    "constant": false
+                },
+                "userid": {
+                    "type": "process.env",
+                    "value": " gmail_userid",
+                    "constant": false
+                },
+                "password": {
+                    "type": "process.env",
+                    "value": "gmail_appPassword",
+                    "constant": false
+                }
+            },
+            "__n_excludedFromValidation__": {}
         }
     }
 }
