@@ -971,7 +971,11 @@ export class Auth {
       parentSpanInst
     );
     try {
+      const bcrypt = require('bcrypt');
       delete bh.input.body.file2;
+      const hashedPassword = await bcrypt.hash(bh.input.body['password'], 10);
+      bh.input.body['password'] = bh.sendPassword;
+      bh.input.body['password'] = hashedPassword;
       bh.body = bh.input.body;
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_9Gv4mFF6jdv5uacF(bh, parentSpanInst);
@@ -1002,7 +1006,7 @@ export class Auth {
         bh.option
       );
       this.tracerService.sendData(spanInst, bh);
-      await this.sd_NHswfzn47DrTYCyd(bh, parentSpanInst);
+      bh = await this.sendEmail(bh, parentSpanInst);
       //appendnew_next_sd_9Gv4mFF6jdv5uacF
       return bh;
     } catch (e) {
@@ -1012,6 +1016,90 @@ export class Auth {
         'sd_9Gv4mFF6jdv5uacF',
         spanInst,
         'sd_9Gv4mFF6jdv5uacF'
+      );
+    }
+  }
+
+  async sendEmail(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan('sendEmail', parentSpanInst);
+    try {
+      bh.status = 200;
+      bh.payload = {
+        to: bh.input.body.email,
+        subject: 'Dead Or Alive Client Registered',
+        from: 'DOAServices',
+        ptag: `<p>Your registration with DOA was successful.</p>
+    <p>Your Password to login is: ${bh.sendPassword}</p>
+    `,
+      };
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.sd_ddrss31Z9FJ8M00y(bh, parentSpanInst);
+      //appendnew_next_sendEmail
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_ezfnqsCbpcYJsGed',
+        spanInst,
+        'sendEmail'
+      );
+    }
+  }
+
+  async sd_ddrss31Z9FJ8M00y(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_ddrss31Z9FJ8M00y',
+      parentSpanInst
+    );
+    try {
+      let mailConfigObj = this.sdService.getConfigObj(
+        'emailout-config',
+        'sd_HkTnnT8uG4AOwNsg'
+      );
+      let server = mailConfigObj.server;
+      let port = mailConfigObj.port;
+      let secure = mailConfigObj.secure;
+      let tls = mailConfigObj.tls;
+      let userid = mailConfigObj.userid;
+      let password = mailConfigObj.password;
+      let emailServiceInstance = EmailOutService.getInstance();
+      bh.result = await emailServiceInstance.sendEmail(
+        {
+          server,
+          port,
+          secure,
+          tls,
+        },
+        {
+          userid,
+          password,
+          to: bh.payload.to,
+          subject: bh.payload.subject,
+          body: bh.payload.body,
+          cc: undefined,
+          bcc: undefined,
+          from: bh.payload.from,
+          html: bh.payload.ptag,
+          iCal: undefined,
+          routingOptions: undefined,
+          contentOptions: undefined,
+          securityOptions: undefined,
+          headerOptions: undefined,
+          attachments: undefined,
+        }
+      );
+      this.tracerService.sendData(spanInst, bh);
+      await this.sd_NHswfzn47DrTYCyd(bh, parentSpanInst);
+      //appendnew_next_sd_ddrss31Z9FJ8M00y
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_ddrss31Z9FJ8M00y',
+        spanInst,
+        'sd_ddrss31Z9FJ8M00y'
       );
     }
   }
@@ -1314,7 +1402,7 @@ export class Auth {
         bh.option
       );
       this.tracerService.sendData(spanInst, bh);
-      await this.sd_IZKI57INX67m4XpQ(bh, parentSpanInst);
+      await this.sd_snCk70oGAdIiyX1S(bh, parentSpanInst);
       //appendnew_next_sd_3bZ0dL716E4LAo89
       return bh;
     } catch (e) {
@@ -1328,13 +1416,13 @@ export class Auth {
     }
   }
 
-  async sd_IZKI57INX67m4XpQ(bh, parentSpanInst) {
+  async sd_snCk70oGAdIiyX1S(bh, parentSpanInst) {
     try {
       bh.web.res.status(200).send(bh.result);
 
       return bh;
     } catch (e) {
-      return await this.errorHandler(bh, e, 'sd_IZKI57INX67m4XpQ');
+      return await this.errorHandler(bh, e, 'sd_snCk70oGAdIiyX1S');
     }
   }
 
