@@ -502,7 +502,12 @@ export class Auth {
       parentSpanInst
     );
     try {
+      const bcrypt = require('bcrypt');
       bh.result = bh.result[0];
+      bh.match = await bcrypt.compare(
+        bh.input.body.password,
+        bh.result.password
+      );
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_441grX9nuZchAI92(bh, parentSpanInst);
       //appendnew_next_sd_YmweFNq5Y8KmEPDX
@@ -525,9 +530,9 @@ export class Auth {
     );
     try {
       if (
-        this.sdService.operators['eq'](
-          bh.result.password,
-          bh.input.body.password,
+        this.sdService.operators['true'](
+          bh.match,
+          undefined,
           undefined,
           undefined
         )
@@ -1086,7 +1091,7 @@ export class Auth {
           contentOptions: undefined,
           securityOptions: undefined,
           headerOptions: undefined,
-          attachments: undefined,
+          attachments: [],
         }
       );
       this.tracerService.sendData(spanInst, bh);
