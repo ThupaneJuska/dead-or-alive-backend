@@ -1314,7 +1314,7 @@ export class Auth {
         bh.option
       );
       this.tracerService.sendData(spanInst, bh);
-      await this.sd_IZKI57INX67m4XpQ(bh, parentSpanInst);
+      await this.sd_0OpFqSPGgL4SUWi2(bh, parentSpanInst);
       //appendnew_next_sd_3bZ0dL716E4LAo89
       return bh;
     } catch (e) {
@@ -1328,13 +1328,13 @@ export class Auth {
     }
   }
 
-  async sd_IZKI57INX67m4XpQ(bh, parentSpanInst) {
+  async sd_0OpFqSPGgL4SUWi2(bh, parentSpanInst) {
     try {
       bh.web.res.status(200).send(bh.result);
 
       return bh;
     } catch (e) {
-      return await this.errorHandler(bh, e, 'sd_IZKI57INX67m4XpQ');
+      return await this.errorHandler(bh, e, 'sd_0OpFqSPGgL4SUWi2');
     }
   }
 
