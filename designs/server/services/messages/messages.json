@@ -105,7 +105,7 @@
         "pipeline": "",
         "functionName": "sd_06WsiCCkJWF4Fz8c",
         "category": "Storage",
-        "x": 205,
+        "x": 445,
         "y": 60,
         "wires": [
             [
@@ -154,7 +154,7 @@
         "headers": {},
         "responseBody": {
             "type": "bh",
-            "value": "res",
+            "value": "result",
             "ssd_typedInputField": true
         },
         "httpcode": {
@@ -166,11 +166,10 @@
         "swaggerResponse": {},
         "responseMapping": {
             "status": 200,
-            "obj": "bh.res",
-            "send": "bh.res"
+            "obj": "bh.result",
+            "send": "bh.result"
         },
         "dataModelIsArray": false,
-        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "erd": "",
@@ -189,7 +188,7 @@
         },
         "functionName": "sd_aARdHUS71BnEyope",
         "category": "HTTP",
-        "x": 305,
+        "x": 545,
         "y": 60,
         "wires": [],
         "__n_excludedFromValidation__": {},
@@ -211,7 +210,7 @@
         "y": 60,
         "wires": [
             [
-                "sd_06WsiCCkJWF4Fz8c"
+                "sd_3Xp8ZsvyERJHB3rN"
             ]
         ],
         "__n_excludedFromValidation__": {},
@@ -605,6 +604,7 @@
         "acceptFileUpload": false,
         "useDataModel": false,
         "dataModelIsArray": false,
+        "uploadFileOptions": "",
         "erd": "",
         "erdName": "",
         "entity": "",
@@ -772,6 +772,7 @@
             "send": "bh.result"
         },
         "dataModelIsArray": false,
+        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "erd": "",
@@ -793,6 +794,162 @@
         "x": 340,
         "y": 380,
         "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "messages",
+        "generated": true
+    },
+    {
+        "id": "sd_3Xp8ZsvyERJHB3rN",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_hebxVU7E4NfTBifC",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.payload = {\n    to: bh.input.body.email,\n    subject: bh.input.body.title,\n    from:bh.input.body.email,\n    ptag:`\n    <p> From ${bh.input.body.email} <br> ${bh.input.body.message}</p>\n    <img src=\"https://static.wikia.nocookie.net/logopedia/images/b/b1/Doa.png/revision/latest?cb=20140212160623\" width=\"300px\" height=\"80px\"/>`\n}",
+        "functionName": "sd_3Xp8ZsvyERJHB3rN",
+        "category": "Function",
+        "x": 220,
+        "y": 60,
+        "wires": [
+            [
+                "sd_0KUO13uYUPRJn9CR"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "messages",
+        "generated": true
+    },
+    {
+        "id": "sd_0KUO13uYUPRJn9CR",
+        "type": "EmailOut",
+        "z": "SSD_SERVICE_ID_sd_hebxVU7E4NfTBifC",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "emailoutconfig": "sd_iDQBGLLAH9RTJrO8",
+        "from": "bh.payload.from",
+        "to": "bh.payload.to",
+        "cc": "undefined",
+        "bcc": "undefined",
+        "subject": "bh.payload.subject",
+        "body": "undefined",
+        "html": "bh.payload.ptag",
+        "attachmentList": {},
+        "switchStates": {
+            "attachment": "Map"
+        },
+        "editableListData": {},
+        "routingoptions": "undefined",
+        "iCal": "undefined",
+        "contentoptions": "undefined",
+        "headeroptions": "undefined",
+        "securityoptions": "undefined",
+        "outputs": 1,
+        "resultMapping": "bh.result",
+        "functionName": "sd_0KUO13uYUPRJn9CR",
+        "category": "Messaging",
+        "x": 340,
+        "y": 60,
+        "wires": [
+            [
+                "sd_06WsiCCkJWF4Fz8c"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "from": {
+                "type": "bh",
+                "value": "payload.from",
+                "nullable": "true",
+                "nullableValue": "undefined",
+                "constant": false
+            },
+            "to": {
+                "type": "bh",
+                "value": "payload.to",
+                "nullable": "true",
+                "nullableValue": "undefined",
+                "constant": false
+            },
+            "cc": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "undefined",
+                "constant": false
+            },
+            "bcc": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "undefined",
+                "constant": false
+            },
+            "subject": {
+                "type": "bh",
+                "value": "payload.subject",
+                "nullable": "true",
+                "nullableValue": "undefined",
+                "constant": false
+            },
+            "body": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "undefined",
+                "constant": false
+            },
+            "html": {
+                "type": "bh",
+                "value": "payload.ptag",
+                "nullable": "true",
+                "nullableValue": "undefined",
+                "constant": false
+            },
+            "routingoptions": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "undefined",
+                "constant": false
+            },
+            "iCal": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "undefined",
+                "constant": false
+            },
+            "contentoptions": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "undefined",
+                "constant": false
+            },
+            "headeroptions": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "undefined",
+                "constant": false
+            },
+            "securityoptions": {
+                "type": "bh",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "undefined",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh",
+                "value": "result",
+                "nullable": "true",
+                "nullableValue": "undefined",
+                "constant": false
+            }
+        },
         "__n_excludedFromValidation__": {},
         "generateNext": false,
         "serviceName": "messages",

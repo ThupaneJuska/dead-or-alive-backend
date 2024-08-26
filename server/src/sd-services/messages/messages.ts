@@ -7,6 +7,7 @@ import * as cookieParser from 'cookie-parser'; //_splitter_
 import { SDBaseService } from '../../services/SDBaseService'; //_splitter_
 import { TracerService } from '../../services/TracerService'; //_splitter_
 import log from '../../utils/Logger'; //_splitter_
+import { EmailOutService } from '../../utils/ndefault-email/EmailOut/EmailOutService'; //_splitter_
 import { MongoPersistance } from '../../utils/ndefault-mongodb/Mongodb/MongoPersistance'; //_splitter_
 //append_imports_end
 export class messages {
@@ -221,7 +222,7 @@ export class messages {
     try {
       bh.input.body['_id'] = new Date().getTime().toString();
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_06WsiCCkJWF4Fz8c(bh, parentSpanInst);
+      bh = await this.sd_3Xp8ZsvyERJHB3rN(bh, parentSpanInst);
       //appendnew_next_sd_JzXvMCJ9u5fGqI1b
       return bh;
     } catch (e) {
@@ -231,6 +232,92 @@ export class messages {
         'sd_JzXvMCJ9u5fGqI1b',
         spanInst,
         'sd_JzXvMCJ9u5fGqI1b'
+      );
+    }
+  }
+
+  async sd_3Xp8ZsvyERJHB3rN(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_3Xp8ZsvyERJHB3rN',
+      parentSpanInst
+    );
+    try {
+      bh.payload = {
+        to: bh.input.body.email,
+        subject: bh.input.body.title,
+        from: bh.input.body.email,
+        ptag: `
+    <p> From ${bh.input.body.email} <br> ${bh.input.body.message}</p>
+    <img src="https://static.wikia.nocookie.net/logopedia/images/b/b1/Doa.png/revision/latest?cb=20140212160623" width="300px" height="80px"/>`,
+      };
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.sd_0KUO13uYUPRJn9CR(bh, parentSpanInst);
+      //appendnew_next_sd_3Xp8ZsvyERJHB3rN
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_3Xp8ZsvyERJHB3rN',
+        spanInst,
+        'sd_3Xp8ZsvyERJHB3rN'
+      );
+    }
+  }
+
+  async sd_0KUO13uYUPRJn9CR(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_0KUO13uYUPRJn9CR',
+      parentSpanInst
+    );
+    try {
+      let mailConfigObj = this.sdService.getConfigObj(
+        'emailout-config',
+        'sd_iDQBGLLAH9RTJrO8'
+      );
+      let server = mailConfigObj.server;
+      let port = mailConfigObj.port;
+      let secure = mailConfigObj.secure;
+      let tls = mailConfigObj.tls;
+      let userid = mailConfigObj.userid;
+      let password = mailConfigObj.password;
+      let emailServiceInstance = EmailOutService.getInstance();
+      bh.result = await emailServiceInstance.sendEmail(
+        {
+          server,
+          port,
+          secure,
+          tls,
+        },
+        {
+          userid,
+          password,
+          to: bh.payload.to,
+          subject: bh.payload.subject,
+          body: undefined,
+          cc: undefined,
+          bcc: undefined,
+          from: bh.payload.from,
+          html: bh.payload.ptag,
+          iCal: undefined,
+          routingOptions: undefined,
+          contentOptions: undefined,
+          securityOptions: undefined,
+          headerOptions: undefined,
+          attachments: undefined,
+        }
+      );
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.sd_06WsiCCkJWF4Fz8c(bh, parentSpanInst);
+      //appendnew_next_sd_0KUO13uYUPRJn9CR
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_0KUO13uYUPRJn9CR',
+        spanInst,
+        'sd_0KUO13uYUPRJn9CR'
       );
     }
   }
@@ -265,7 +352,7 @@ export class messages {
 
   async sd_aARdHUS71BnEyope(bh, parentSpanInst) {
     try {
-      bh.web.res.status(200).send(bh.res);
+      bh.web.res.status(200).send(bh.result);
 
       return bh;
     } catch (e) {
