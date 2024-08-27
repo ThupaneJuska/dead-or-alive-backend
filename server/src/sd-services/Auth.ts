@@ -1043,6 +1043,7 @@ export class Auth {
       const bcrypt = require('bcrypt');
       delete bh.input.body.file2;
       const hashedPassword = await bcrypt.hash(bh.input.body['password'], 10);
+      bh.sendPassword = bh.input.body.password;
       bh.input.body['password'] = hashedPassword;
       bh.body = bh.input.body;
       this.tracerService.sendData(spanInst, bh);
@@ -1314,9 +1315,12 @@ export class Auth {
       parentSpanInst
     );
     try {
+      const bcrypt = require('bcrypt');
       const updateData = { ...bh.input.body };
       delete updateData._id;
       bh.filter = { _id: bh.input.params._id };
+      const hashedPassword = await bcrypt.hash(bh.input.body['password'], 10);
+      updateData.password = hashedPassword;
       bh.body = { $set: updateData };
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_iMZJWHUSIo0Wev4k(bh, parentSpanInst);
