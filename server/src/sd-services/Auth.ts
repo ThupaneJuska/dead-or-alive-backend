@@ -311,6 +311,70 @@ export class Auth {
         this.generatedMiddlewares
       )
     );
+
+    this.app['post'](
+      `${this.serviceBasePath}/addSchedule`,
+      cookieParser(),
+      this.sdService.getMiddlesWaresBySequenceId(
+        null,
+        'pre',
+        this.generatedMiddlewares
+      ),
+
+      async (req, res, next) => {
+        let bh: any = {};
+        try {
+          bh = this.sdService.__constructDefault(
+            { local: {}, input: {} },
+            req,
+            res,
+            next
+          );
+          let parentSpanInst = null;
+          bh = await this.sd_Hv8hlXYXwgEq7ail(bh, parentSpanInst);
+          //appendnew_next_sd_YSE56pCp76017UPM
+        } catch (e) {
+          return await this.errorHandler(bh, e, 'sd_YSE56pCp76017UPM');
+        }
+      },
+      this.sdService.getMiddlesWaresBySequenceId(
+        null,
+        'post',
+        this.generatedMiddlewares
+      )
+    );
+
+    this.app['get'](
+      `${this.serviceBasePath}/getSchedules`,
+      cookieParser(),
+      this.sdService.getMiddlesWaresBySequenceId(
+        null,
+        'pre',
+        this.generatedMiddlewares
+      ),
+
+      async (req, res, next) => {
+        let bh: any = {};
+        try {
+          bh = this.sdService.__constructDefault(
+            { local: {}, input: {} },
+            req,
+            res,
+            next
+          );
+          let parentSpanInst = null;
+          bh = await this.sd_qXUuDeCOlHPNmMlV(bh, parentSpanInst);
+          //appendnew_next_sd_eSz4ihCKHawkIixS
+        } catch (e) {
+          return await this.errorHandler(bh, e, 'sd_eSz4ihCKHawkIixS');
+        }
+      },
+      this.sdService.getMiddlesWaresBySequenceId(
+        null,
+        'post',
+        this.generatedMiddlewares
+      )
+    );
     //appendnew_flow_Auth_HttpIn
   }
   //   service flows_Auth
@@ -1431,6 +1495,127 @@ export class Auth {
       return bh;
     } catch (e) {
       return await this.errorHandler(bh, e, 'sd_snCk70oGAdIiyX1S');
+    }
+  }
+
+  async sd_Hv8hlXYXwgEq7ail(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_Hv8hlXYXwgEq7ail',
+      parentSpanInst
+    );
+    try {
+      bh.input.body['_id'] = new Date().getTime();
+      bh.event = bh.input.body;
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.sd_67u8XiPDpUOO9g8t(bh, parentSpanInst);
+      //appendnew_next_sd_Hv8hlXYXwgEq7ail
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_Hv8hlXYXwgEq7ail',
+        spanInst,
+        'sd_Hv8hlXYXwgEq7ail'
+      );
+    }
+  }
+
+  async sd_67u8XiPDpUOO9g8t(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_67u8XiPDpUOO9g8t',
+      parentSpanInst
+    );
+    try {
+      bh.result = await MongoPersistance.getInstance().insertOne(
+        'sd_PhRLzlckwjzX0TdC',
+        'schedules',
+        bh.event,
+        bh.options,
+        bh.options
+      );
+      this.tracerService.sendData(spanInst, bh);
+      await this.sd_IZKI57INX67m4XpQ(bh, parentSpanInst);
+      //appendnew_next_sd_67u8XiPDpUOO9g8t
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_67u8XiPDpUOO9g8t',
+        spanInst,
+        'sd_67u8XiPDpUOO9g8t'
+      );
+    }
+  }
+
+  async sd_IZKI57INX67m4XpQ(bh, parentSpanInst) {
+    try {
+      bh.web.res.status(200).send(bh.result);
+
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_IZKI57INX67m4XpQ');
+    }
+  }
+
+  async sd_qXUuDeCOlHPNmMlV(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_qXUuDeCOlHPNmMlV',
+      parentSpanInst
+    );
+    try {
+      bh.collection = 'schedules';
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.sd_sm2nID6Hec6N9viE(bh, parentSpanInst);
+      //appendnew_next_sd_qXUuDeCOlHPNmMlV
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_qXUuDeCOlHPNmMlV',
+        spanInst,
+        'sd_qXUuDeCOlHPNmMlV'
+      );
+    }
+  }
+
+  async sd_sm2nID6Hec6N9viE(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_sm2nID6Hec6N9viE',
+      parentSpanInst
+    );
+    try {
+      bh.result = await MongoPersistance.getInstance().find(
+        'sd_PhRLzlckwjzX0TdC',
+        bh.collection,
+        bh.query,
+        bh.options,
+        bh.options
+      );
+      this.tracerService.sendData(spanInst, bh);
+      await this.sd_vkYXatluSE0gu38L(bh, parentSpanInst);
+      //appendnew_next_sd_sm2nID6Hec6N9viE
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_sm2nID6Hec6N9viE',
+        spanInst,
+        'sd_sm2nID6Hec6N9viE'
+      );
+    }
+  }
+
+  async sd_vkYXatluSE0gu38L(bh, parentSpanInst) {
+    try {
+      bh.web.res.status(200).send(bh.result);
+
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_vkYXatluSE0gu38L');
     }
   }
 
